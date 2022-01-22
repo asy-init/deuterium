@@ -1,0 +1,12 @@
+from pathlib import Path
+import discord
+
+TOKEN = "<token here>"
+
+PREFIX = "d?"
+
+RPC = ["Visual Studio Code", "PyCharm IDE", "Neovim", "Brackets"]
+
+INTENT = discord.Intents.default()
+
+COGS = [x.stem for x in Path("commands").glob("*.py")]
