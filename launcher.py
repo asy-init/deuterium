@@ -10,10 +10,17 @@ bot = commands.Bot(command_prefix=settings.PREFIX, intents=settings.INTENT)
 
 @bot.event
 async def on_ready():
+    print()
+    print(f"• logged in as {bot.user}\n• Connected to {len(bot.guilds)} Severs")
+    print()
 
-    print(f"• logged in  as {bot.user}\n• Connected to {len(bot.guilds)} Severs")
     main.initial_start(rpc=settings.RPC, self=bot, cogs=settings.COGS)
-    bot.loop.create_task(main.update_rpc(self=bot, rpc=settings.RPC))
+
+
+@bot.event
+async def on_message_delete(message):
+    if message.author.id == 805412409174654986:
+        await message.channel.send("anti-snipe -> on", delete_after=0.01)
 
 
 if __name__ == "__main__":
