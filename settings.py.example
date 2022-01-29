@@ -1,12 +1,11 @@
-from pathlib import Path
-import discord
+from discord import Intents
 
-TOKEN = "<token here>"
+TOKEN = "..."
 
-PREFIX = "d?"
+PREFIX = "..."
 
-RPC = ["Visual Studio Code", "PyCharm IDE", "Neovim", "Brackets"]
+RPC = ["1", "2", "3", "4", "5"]
 
-INTENT = discord.Intents.default()
+# note : stick to 5 items due to rate limiting.
 
-COGS = [x.stem for x in Path("commands").glob("*.py")]
+INTENT = Intents.default()

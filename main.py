@@ -1,28 +1,22 @@
-from asyncio import sleep
+from discord.ext import commands
 
-import discord
+from utils.loader import load_commands
+from utils.status import load_status
+
+import settings
 
 
-def initial_start(
-    rpc,
-    self,
-    cogs,
-):
-    def load_commands(self):
-        for cog in cogs:
-            try:
-                print(f"• loading {cog}")
-                self.load_extension(f"commands.{cog}")
-                print(f"• loaded {cog}")
-            except Exception:
-                print(
-                    f"failed to load extension {cog}\n {type(Exception).__name__} : {Exception}"
-                )
+bot = commands.Bot(
+    command_prefix=commands.when_mentioned_or(settings.PREFIX), intents=settings.INTENT
+)
 
-    async def update_rpc(self, rpc):
-        for x in rpc:
-            await self.change_presence(activity=discord.Game(name=x))
-            await sleep(10)
 
-    load_commands(self)
-    self.loop.create_task(update_rpc(self=self, rpc=rpc))
+@bot.event
+async def on_ready():
+    print(f"\n• logged in as {bot.user}\n• Connected to {len(bot.guilds)} Severs\n")
+    await load_commands(self=bot)
+    bot.loop.create_task(load_status(self=bot, status=settings.STATUS))
+
+
+if __name__ == "__main__":
+    bot.run(settings.TOKEN)
