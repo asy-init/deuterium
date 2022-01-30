@@ -9,7 +9,7 @@ EVENTS = [x.stem for x in Path("events").glob("*.py")]
 
 
 async def load_commands(self):
-    pprint(f">> Loading {len(COGS)}\n")
+    pprint(f">> Loading {len(COGS)} Commands\n")
 
     for cog in COGS:
         try:
@@ -25,7 +25,7 @@ async def load_commands(self):
 
 
 async def load_events(self):
-    pprint(f">> Loading {len(EVENTS)}\n")
+    pprint(f">> Loading {len(EVENTS)} Events\n")
 
     for event in EVENTS:
         try:
@@ -38,3 +38,8 @@ async def load_events(self):
             pprint(
                 f">> failed to load extension [u]{event}[/]\n>> {type(e).__name__} : {e}"
             )
+
+
+async def load_combine(self):
+    await load_commands(self=self)
+    await load_events(self=self)

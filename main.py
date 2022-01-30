@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-from utils.loader import load_commands, load_events
+from utils.loader import load_combine
 from utils.status import load_status
 
 import settings
@@ -14,8 +14,7 @@ bot = commands.Bot(
 @bot.event
 async def on_ready():
     print(f"\n• logged in as {bot.user}\n• Connected to {len(bot.guilds)} Severs\n")
-    await load_commands(self=bot)
-    await load_events(self=bot)
+    await load_combine(self=bot)
     bot.loop.create_task(load_status(self=bot, status=settings.STATUS))
 
 
