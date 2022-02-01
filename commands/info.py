@@ -13,7 +13,7 @@ class BotInfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=["stats"])
     async def info(self, ctx):
 
         pyversion = version()

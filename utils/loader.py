@@ -14,14 +14,12 @@ async def load_commands(self):
     for cog in COGS:
         try:
             pprint(f">> Loading {cog}")
-
             self.load_extension(f"commands.{cog}")
             pprint(f">> Loaded {cog}\n")
 
         except Exception as e:
-            pprint(
-                f">> failed to load extension [u]{cog}[/]\n>> {type(e).__name__} : {e}"
-            )
+            pprint(f">> failed to load extension [u]{cog}[/]")
+            pprint(f">> {type(e).__name__} : {e}")
 
 
 async def load_events(self):
@@ -30,14 +28,12 @@ async def load_events(self):
     for event in EVENTS:
         try:
             pprint(f">> Loading {event}")
-
             self.load_extension(f"events.{event}")
             pprint(f">> Loaded {event}\n")
 
         except Exception as e:
-            pprint(
-                f">> failed to load extension [u]{event}[/]\n>> {type(e).__name__} : {e}"
-            )
+            pprint(f">> failed to load extension [u]{event}[/]")
+            pprint(f">> {type(e).__name__} : {e.with_traceback()}")
 
 
 async def load_combine(self):
